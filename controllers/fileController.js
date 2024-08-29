@@ -2,7 +2,7 @@ const db = require("../db/index");
 const path = require("path");
 const fs = require("fs");
 const cloudinary = require("../cloudinaryConfig");
-const axios = require("axios");
+const fetch = require("node-fetch");
 
 exports.uploadFile = async (req, res) => {
   try {
@@ -54,12 +54,19 @@ exports.downloadFile = async (req, res) => {
       return res.status(404).send("File not found.");
     }
 
-    const response = await axios.get(file.path, { responseType: "stream" });
+    // Fetch the file from Cloudinary
+    const response = await fetch(file.path);
 
+    if (!response.ok) {
+      throw new Error(`Failed to fetch file: ${response.statusText}`);
+    }
+
+    // Set headers to force download
     res.setHeader("Content-Disposition", `attachment; filename="${file.name}"`);
-    res.setHeader("Content-Type", response.headers["content-type"]);
+    res.setHeader("Content-Type", response.headers.get("Content-Type"));
 
-    response.data.pipe(res);
+    // Pipe the file stream to the response
+    response.body.pipe(res);
   } catch (error) {
     console.error("Error fetching file:", error);
     res.status(500).send("An error occurred while downloading the file.");
