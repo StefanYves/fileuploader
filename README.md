@@ -1,6 +1,6 @@
 # File Uploader App
 
-A web application for uploading and managing files. Users can sign in to upload files to their folders, view details of uploaded files, and download them. Admins have additional privileges to manage file uploads and user access.
+A web application for uploading and managing files. Users can sign in to upload files to their folders, view details of uploaded files, and download them. 
 
 # Link to Project
 
