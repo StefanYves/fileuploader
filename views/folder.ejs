@@ -8,9 +8,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-gray-200 font-sans">
-    <div class="container mx-auto p-8">
-      <h1 class="text-3xl font-bold mb-6 text-center"><%= folders.name %></h1>
-
+    <h1 class="text-3xl font-bold mb-6 mt-5 text-center">
+      <%= folders.name %>
+    </h1>
+    <div class="container mx-auto p-8 bg-white rounded-lg">
       <form
         action="/folders/<%= folders.id %>/upload"
         method="POST"
@@ -64,6 +65,12 @@
         <li class="text-center">No files found.</li>
         <% } %>
       </ul>
+      <a
+        href="/"
+        class="w-full bg-purple-500 text-white p-3 rounded-lg hover:bg-purple-600 transition duration-300"
+      >
+        Back
+      </a>
     </div>
   </body>
 </html>
